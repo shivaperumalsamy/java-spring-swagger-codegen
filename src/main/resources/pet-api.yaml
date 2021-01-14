@@ -1,0 +1,104 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "Swagger Petstore"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:4200"
+basePath: "/api"
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+- name: "Pet"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+
+schemes:
+# - "https"
+- "http"
+
+paths:
+  /pets:
+    get:
+      operationId: listPets
+      summary: List all pets.
+      tags:
+        - Pet
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pet'
+        default:
+          description: Any response other than 200 OK is an error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    post:
+      operationId: addPet
+      summary: add pet
+      tags:
+        - Pet
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            type: string
+      parameters:
+      - in: body
+        name: pet
+        description: The pet details
+        schema:
+          $ref: '#/definitions/Pet'
+  
+definitions:
+  ErrorResponse:
+    type: object
+    properties:
+      type:
+        type: string
+      message:
+        type: string
+        x-go-name: error
+      status:
+        type: integer
+        format: int32
+    discriminator: type
+  InternalError:
+    allOf:
+      - $ref: '#/definitions/ErrorResponse'
+  BadRequestError:
+    allOf:
+      - $ref: '#/definitions/ErrorResponse'
+  NotFoundError:
+    allOf:
+      - $ref: '#/definitions/ErrorResponse'
+  SuccessResponse:
+    type: object
+    properties:
+      type:
+        type: string
+      status:
+        type: integer
+        format: int32
+    discriminator: type
+  Pet:
+    description: This is pet model
+    type: object 
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
