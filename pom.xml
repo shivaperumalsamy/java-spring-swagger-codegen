@@ -9,7 +9,7 @@
 		<version>2.4.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.sirius</groupId>
+	<groupId>com.myorg</groupId>
 	<artifactId>Pet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Pet</name>
@@ -87,8 +87,8 @@
 							<language>spring</language>
 							<output>${project.build.directory}/generated-sources/</output>
 							<generateSupportingFiles>false</generateSupportingFiles>
-							<apiPackage>com.sirius.petservice.api</apiPackage>
-							<modelPackage>com.sirius.petservice.models</modelPackage>
+							<apiPackage>com.myorg.petservice.api</apiPackage>
+							<modelPackage>com.myorg.petservice.models</modelPackage>
 							<configOptions>
 								<interfaceOnly>true</interfaceOnly>
 							</configOptions>

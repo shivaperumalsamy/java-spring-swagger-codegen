@@ -15,6 +15,19 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  OAuth:
+    type: oauth2
+    description: ''
+    flow: accessCode
+    scopes:
+      App_Read: ''
+      App_Admin: ''
+    authorizationUrl: 'https://azure-ad.com/oauth2/authorize'
+    tokenUrl: 'https://azure-ad.com/oauth2/token'
+security:
+  - OAuth:
+      - App_Admin
 tags:
 - name: "Pet"
   description: "Everything about your Pets"
@@ -44,6 +57,9 @@ paths:
           description: Any response other than 200 OK is an error
           schema:
             $ref: '#/definitions/ErrorResponse'
+      security:
+        - OAuth:
+            - App_Admin
     post:
       operationId: addPet
       summary: add pet
